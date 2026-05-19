@@ -5,18 +5,48 @@
     <link rel="stylesheet" type="text/css" href="popup.css" />
   </head>
   <body>
-    <h1>Brightwheel Image Grabber</h1>
-    <h2>GuardianID</h2>
-    <p id="guardian-id"></p>
+    <main class="popup-shell">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">Brightwheel</p>
+          <h1>Photo Exporter</h1>
+        </div>
+        <div class="brand-mark" aria-hidden="true">BW</div>
+      </header>
 
-    <h2>Student</h2>
-    <select name="student" id="student"></select>
+      <section class="control-panel">
+        <label for="student">
+          <span>Student</span>
+          <select name="student" id="student"></select>
+        </label>
 
-    <h2>Start At</h2>
-    <input type="date" id="start-at" name="date" />
-    <h2>End At</h2>
-    <input type="date" id="end-at" name="date" />
-    <button id="grabBtn">GRAB NOW</button>
+        <div class="date-grid">
+          <label for="start-at">
+            <span>Start</span>
+            <input type="date" id="start-at" name="date" />
+          </label>
+          <label for="end-at">
+            <span>End</span>
+            <input type="date" id="end-at" name="date" />
+          </label>
+        </div>
+        <p id="date-range-warning" class="date-warning" hidden>
+          Date ranges over 90 days can take longer and may download a large ZIP.
+        </p>
+      </section>
+
+      <section class="progress-panel" aria-live="polite">
+        <div class="progress-copy">
+          <span id="progress-status">Ready to export photos.</span>
+          <strong id="progress-count">0%</strong>
+        </div>
+        <div class="progress-track">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+      </section>
+
+      <button id="grabBtn" class="primary-action">Export Photos</button>
+    </main>
     <script src="lib/jszip.min.js"></script>
     <script src="popup.js"></script>
   </body>

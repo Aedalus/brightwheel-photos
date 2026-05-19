@@ -1,15 +1,248 @@
-body {
-    text-align:center;
-    width:200px;
+:root {
+  color-scheme: light;
+  --bg: #f4f7f8;
+  --panel: #ffffff;
+  --ink: #10232b;
+  --muted: #65757c;
+  --line: #dbe5e8;
+  --primary: #168e95;
+  --primary-dark: #0e6f77;
+  --primary-soft: #d9f1f0;
+  --warning-bg: #fff7d6;
+  --warning-border: #f3d56b;
+  --warning-ink: #725100;
+  --error: #b42318;
+  --shadow: 0 14px 34px rgba(18, 44, 52, 0.15);
 }
 
-button {
-    width:100%;
-    color:white;
-    background:linear-gradient(#01a9e1, #5bc4bc);
-    border-width:0px;
-    border-radius:20px;
-    padding:5px;
-    font-weight: bold;
-    cursor:pointer;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 340px;
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(22, 142, 149, 0.16), transparent 34%),
+    var(--bg);
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  overflow: hidden;
+}
+
+.popup-shell {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.app-header > div:first-child {
+  min-width: 0;
+}
+
+.eyebrow {
+  margin: 0 0 3px;
+  color: var(--primary-dark);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: 23px;
+  line-height: 1.05;
+  white-space: nowrap;
+}
+
+.brand-mark {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 8px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #117f88, #40bfb4);
+  box-shadow: var(--shadow);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.control-panel,
+.progress-panel {
+  min-width: 0;
+  border: 1px solid rgba(219, 229, 232, 0.9);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 8px 22px rgba(18, 44, 52, 0.08);
+}
+
+label span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.control-panel {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+}
+
+label {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+}
+
+select,
+input {
+  width: 100%;
+  min-width: 0;
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 8px 10px;
+  color: var(--ink);
+  background: #ffffff;
+  font: inherit;
+  font-size: 14px;
+}
+
+select:focus,
+input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+  outline: none;
+}
+
+.date-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 10px;
+}
+
+.date-warning {
+  margin: -2px 0 0;
+  border: 1px solid var(--warning-border);
+  border-radius: 7px;
+  padding: 9px 10px;
+  color: var(--warning-ink);
+  background: var(--warning-bg);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.date-warning[hidden] {
+  display: none;
+}
+
+.progress-panel {
+  display: grid;
+  gap: 9px;
+  padding: 12px;
+}
+
+.progress-copy {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+#progress-status {
+  overflow-wrap: anywhere;
+}
+
+#progress-count {
+  color: var(--ink);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-track {
+  overflow: hidden;
+  height: 9px;
+  border-radius: 999px;
+  background: #e8eff1;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #117f88, #5cc9be);
+  transition: width 180ms ease;
+}
+
+.progress-bar.is-active {
+  width: 42%;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.58) 50%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(90deg, #117f88, #5cc9be);
+  animation: loadingSweep 1.1s ease-in-out infinite;
+}
+
+.progress-panel.is-error #progress-status,
+.progress-panel.is-error #progress-count {
+  color: var(--error);
+}
+
+.progress-panel.is-error .progress-bar {
+  background: var(--error);
+}
+
+.primary-action {
+  width: 100%;
+  min-height: 44px;
+  border: 0;
+  border-radius: 8px;
+  color: #ffffff;
+  background: var(--primary);
+  box-shadow: 0 12px 24px rgba(22, 142, 149, 0.26);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.primary-action:hover:not(:disabled) {
+  background: var(--primary-dark);
+}
+
+.primary-action:focus {
+  box-shadow:
+    0 12px 24px rgba(22, 142, 149, 0.26),
+    0 0 0 3px var(--primary-soft);
+  outline: none;
+}
+
+.primary-action:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}
+
+@keyframes loadingSweep {
+  0% {
+    transform: translateX(-55%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
 }
